@@ -1,0 +1,7 @@
+type LuckPermsPlayer {
+    uuid: String
+
+    username: String
+
+    primary_group: String
+}

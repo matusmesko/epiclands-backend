@@ -1,0 +1,6 @@
+type Query {
+
+    getAllLuckpermsPlayers: [LuckPermsPlayer]
+    getPlayersByRank(rank: String): [LuckPermsPlayer]
+
+}
