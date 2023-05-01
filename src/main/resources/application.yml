@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://mysql.hostify.cz/db_70006_webdevelopment
+    username: db_70006_webdevelopment
+    password: qyx4BOsKuqWzE2Zk
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 30
+      max-lifetime: 1800000
+      minimum-idle: 2
+
+graphql:
+  servlet:
+    maxQueryDepth: 100
+    exception-handlers-enabled: true
+
+
+graphiql:
+  mapping: /graphiql
+  endpoint:
+    graphql: /graphql
+    subscriptions: /subscriptions
+  subscriptions:
+    timeout: 30
+    reconnect: false
+  static:
+    basePath: /
+  enabled: true
