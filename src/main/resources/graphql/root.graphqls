@@ -1,6 +1,15 @@
 type Query {
 
     getAllLuckpermsPlayers: [LuckPermsPlayer]
+    getOwners: [LuckPermsPlayer]
+    getTraineeBuilders: [LuckPermsPlayer]
+    getHelpers: [LuckPermsPlayer]
+    getBuilders: [LuckPermsPlayer]
+    getCoOwners: [LuckPermsPlayer]
+    getEventers: [LuckPermsPlayer]
+    getMainHelpers: [LuckPermsPlayer]
+    getTraineeHelpers: [LuckPermsPlayer]
+    getAdmins: [LuckPermsPlayer]
     getPlayersByRank(rank: String): [LuckPermsPlayer]
 
 }
