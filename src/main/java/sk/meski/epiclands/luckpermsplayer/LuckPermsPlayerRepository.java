@@ -54,4 +54,31 @@ public interface LuckPermsPlayerRepository extends JpaRepository<LuckPermsPlayer
     @Transactional
     List<LuckPermsPlayerEntity> findAllAdmins();
 
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'developer';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllDevelopers();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'hl.builder';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllMainBuilders();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'hl.developer';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllMainDevelopers();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'hl.technik';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllMainTechnics();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'technik';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllTechnics();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'tester';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllTesters();
+
+    @Query(value = "SELECT * FROM luckperms_players WHERE primary_group = 'vedení';",nativeQuery = true)
+    @Transactional
+    List<LuckPermsPlayerEntity> findAllManagement();
 }

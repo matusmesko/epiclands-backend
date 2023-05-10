@@ -58,4 +58,32 @@ public class LuckPermsPlayerRootResolver implements GraphQLQueryResolver {
         return luckPermsPlayerService.getAdmins();
     }
 
+    public List<LuckPermsPlayerEntity> getDevelopers() {
+        return luckPermsPlayerService.getDevelopers();
+    }
+
+    public List<LuckPermsPlayerEntity> getMainBuilders() {
+        return luckPermsPlayerService.getMainBuilders();
+    }
+
+    public List<LuckPermsPlayerEntity> getMainDevelopers() {
+        return luckPermsPlayerService.getMainDevelopers();
+    }
+
+    public List<LuckPermsPlayerEntity> getMainTechnics() {
+        return luckPermsPlayerService.getMainTechnics();
+    }
+
+    public List<LuckPermsPlayerEntity> getTechnics() {
+        return luckPermsPlayerService.getTechnics();
+    }
+
+    public List<LuckPermsPlayerEntity> getTesters() {
+        return luckPermsPlayerService.getTesters();
+    }
+
+    public List<LuckPermsPlayerEntity> getManagement() {
+        return luckPermsPlayerService.getManagement();
+    }
+
 }

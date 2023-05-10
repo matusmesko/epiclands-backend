@@ -138,6 +138,90 @@ public class LuckPermsPlayerService {
         return newPlayers;
     }
 
+    public List<LuckPermsPlayerEntity> getDevelopers() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllDevelopers();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getMainBuilders() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllMainBuilders();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getMainDevelopers() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllMainDevelopers();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getMainTechnics() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllMainTechnics();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getTechnics() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllTechnics();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getTesters() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllTesters();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getManagement() {
+        List<LuckPermsPlayerEntity> players = luckPermsPlayerRepository.findAllManagement();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+        for (LuckPermsPlayerEntity player : players) {
+            LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+            String newUuid = getUuid(entity.getUsername());
+            entity.setUuid(newUuid);
+            newPlayers.add(entity);
+        }
+        return newPlayers;
+    }
+
     public String getUuid(String name) {
         String url = "https://api.mojang.com/users/profiles/minecraft/"+name;
         try {
@@ -154,7 +238,7 @@ public class LuckPermsPlayerService {
             throw new RuntimeException(e);
         }
 
-        return "ce7ea4cb078947c9b536144f836a30c2";
+        return "3fb7eb4d29834087b8e879a8a1752768";
     }
 
 
