@@ -6,9 +6,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://mysql.hostify.cz/db_70006_webdevelopment
-    username: db_70006_webdevelopment
-    password: qyx4BOsKuqWzE2Zk
+    url: jdbc:mysql://mysql.hostify.cz/db_70006_luckperms
+    username: db_70006_luckperms
+    password: liuGIZDFIUhjgvv1
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 30
