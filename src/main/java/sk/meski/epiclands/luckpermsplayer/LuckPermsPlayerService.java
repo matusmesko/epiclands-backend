@@ -13,6 +13,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -220,6 +221,48 @@ public class LuckPermsPlayerService {
             newPlayers.add(entity);
         }
         return newPlayers;
+    }
+
+    public List<LuckPermsPlayerEntity> getAdminTeam() {
+        List<LuckPermsPlayerEntity> adminTeam = luckPermsPlayerRepository.findAll();
+        List<LuckPermsPlayerEntity> newAdminTeam = new ArrayList<>();
+        List<LuckPermsPlayerEntity> newPlayers = new ArrayList<>();
+
+        for (int i = 0; i < getOwners().size(); i++) {
+            for (LuckPermsPlayerEntity player : getOwners()) {
+                LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+                String newUuid = getUuid(entity.getUsername());
+                entity.setUuid(newUuid);
+                newPlayers.add(entity);
+            }
+            newAdminTeam.add(newPlayers.stream().filter(p -> p.getPrimary_group().equalsIgnoreCase("majitel"))
+                    .collect(Collectors.toList()).get(i));
+        }
+
+        for (int i = 0; i < getCoOwners().size(); i++) {
+            for (LuckPermsPlayerEntity player : getCoOwners()) {
+                LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+                String newUuid = getUuid(entity.getUsername());
+                entity.setUuid(newUuid);
+                newPlayers.add(entity);
+            }
+            newAdminTeam.add(newPlayers.stream().filter(p -> p.getPrimary_group().equalsIgnoreCase("sp.majitel"))
+                    .collect(Collectors.toList()).get(i));
+        }
+
+        for (int i = 0; i < getHelpers().size(); i++) {
+            for (LuckPermsPlayerEntity player : getHelpers()) {
+                LuckPermsPlayerEntity entity = luckPermsPlayerRepository.findByUsername(player.getUsername());
+                String newUuid = getUuid(entity.getUsername());
+                entity.setUuid(newUuid);
+                newPlayers.add(entity);
+            }
+            newAdminTeam.add(newPlayers.stream().filter(p -> p.getPrimary_group().equalsIgnoreCase("helper"))
+                    .collect(Collectors.toList()).get(i));
+        }
+
+
+        return newAdminTeam;
     }
 
     public String getUuid(String name) {

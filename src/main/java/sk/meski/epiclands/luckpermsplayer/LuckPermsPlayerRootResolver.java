@@ -86,4 +86,8 @@ public class LuckPermsPlayerRootResolver implements GraphQLQueryResolver {
         return luckPermsPlayerService.getManagement();
     }
 
+    public List<LuckPermsPlayerEntity> getAdminTeam() {
+        return luckPermsPlayerService.getAdminTeam();
+    }
+
 }

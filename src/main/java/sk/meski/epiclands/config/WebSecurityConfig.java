@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("https://epiclands.netlify.app");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("POST");
         configuration.setAllowCredentials(true);
