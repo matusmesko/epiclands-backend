@@ -1,0 +1,5 @@
+type AdminTeam {
+    mojangUuid: String
+    name: String
+    position: String
+}

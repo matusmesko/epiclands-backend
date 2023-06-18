@@ -5,6 +5,10 @@ import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.stereotype.Service;
+import sk.meski.epiclands.adminteam.AdminTeamEntity;
+import sk.meski.epiclands.adminteam.AdminTeamRepository;
+import sk.meski.epiclands.status.StatusEntity;
+import sk.meski.epiclands.status.StatusType;
 
 
 import java.io.FileNotFoundException;
@@ -20,6 +24,8 @@ import java.util.stream.Collectors;
 public class LuckPermsPlayerService {
 
     private final LuckPermsPlayerRepository luckPermsPlayerRepository;
+
+    private final AdminTeamRepository adminTeamRepository;
 
     public List<LuckPermsPlayerEntity> getAllLuckpermsPlayers() {
         return luckPermsPlayerRepository.findAll();
@@ -264,6 +270,7 @@ public class LuckPermsPlayerService {
 
         return newAdminTeam;
     }
+
 
     public String getUuid(String name) {
         String url = "https://api.mojang.com/users/profiles/minecraft/"+name;

@@ -18,5 +18,17 @@ type Query {
     getTesters: [LuckPermsPlayer]
     getManagement: [LuckPermsPlayer]
     getPlayersByRank(rank: String): [LuckPermsPlayer]
+}
 
+type Mutation {
+    updatePlayers: StatusEntity
+}
+
+type StatusEntity {
+    status: Status,
+    message: String,
+}
+
+enum Status {
+    SUCCESS,FAILED
 }

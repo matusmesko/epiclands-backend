@@ -1,9 +1,6 @@
 server:
   port: 8080
 
-
-
-
 spring:
   datasource:
     url: jdbc:mysql://mysql.hostify.cz/db_70006_webdevelopment

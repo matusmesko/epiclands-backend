@@ -4,6 +4,7 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import sk.meski.epiclands.status.StatusEntity;
 
 import java.util.List;
 
@@ -89,5 +90,6 @@ public class LuckPermsPlayerRootResolver implements GraphQLQueryResolver {
     public List<LuckPermsPlayerEntity> getAdminTeam() {
         return luckPermsPlayerService.getAdminTeam();
     }
+
 
 }
