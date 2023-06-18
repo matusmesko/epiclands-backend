@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Validated
@@ -31,56 +32,75 @@ public class AdminTeamMutation implements GraphQLMutationResolver{
     private final LuckPermsPlayerRepository luckPermsPlayerRepository;
     private final AdminTeamRepository adminTeamRepository;
 
-//    public StatusEntity updatePlayers() {
-//        List<LuckPermsPlayerEntity> luckpermsPlayers = luckPermsPlayerRepository.findAll();
-//        List<AdminTeamEntity> updatedPlayers = new ArrayList<>();
-//
-//        for (LuckPermsPlayerEntity lp: luckpermsPlayers) {
-//            if (lp.getPrimary_group() == "majitel") {
-//                System.out.println(lp.getUsername() + lp.getPrimary_group());
-//                String mojangUuid = getUuid(lp.getUsername());
-//                AdminTeamEntity entity = new AdminTeamEntity();
-//                entity.setMojangUuid(lp.getUuid());
-//                entity.setName(lp.getUsername());
-//                entity.setPosition(lp.getPrimary_group());
-//                updatedPlayers.add(entity);
-//                adminTeamRepository.save(entity);
-//            }
-//            if (lp.getPrimary_group() == "sp.majitel")   {
-//                String mojangUuid = getUuid(lp.getUsername());
-//                AdminTeamEntity entity = new AdminTeamEntity(mojangUuid, lp.getUsername(), lp.getPrimary_group());
-//                updatedPlayers.add(entity);
-//                adminTeamRepository.save(entity);
-//            }
-//        }
-//
-//
-//        return new StatusEntity(StatusType.SUCCESS, "Hráči boli updatnutý!");
-//    }
 
     public StatusEntity updatePlayers() {
-        updateGroup(luckPermsPlayerRepository.findAllOwners(), adminTeamRepository.getAllOwners());
+        updateGroup();
         return new StatusEntity(StatusType.SUCCESS, "Hráči boli updatnutý!");
     }
 
-    private void updateGroup(List<LuckPermsPlayerEntity> luckPermsPlayer, List<AdminTeamEntity> currentAT) {
-        List<LuckPermsPlayerEntity> luckpermsPlayers = luckPermsPlayer;
-        List<AdminTeamEntity> currentOwners = currentAT;
-        List<AdminTeamEntity> iterable = new ArrayList<>();
-        for (LuckPermsPlayerEntity l: luckpermsPlayers) {
-            AdminTeamEntity entity = new AdminTeamEntity();
-            entity.setUsername(l.getUsername());
-            entity.setUuid(getUuid(l.getUsername()));
-            entity.setPrimary_group(l.getPrimary_group());
-            iterable.add(entity);
+    private void updateGroup() {
+        List<LuckPermsPlayerEntity> luckpermsPlayers = luckPermsPlayerRepository.findAllAT();
+        List<AdminTeamEntity> currentAt = adminTeamRepository.findAll();
 
-            for (AdminTeamEntity a : currentOwners) {
-                if (!l.getUsername().contains(a.getUsername())) {
-                    adminTeamRepository.delete(a);
+        // co potrebujeme ?
+
+        List<AdminTeamEntity> newAt = new ArrayList<>();
+
+        // vzit nove lidi a nahrat je do databaze + uuid    luckpermsPlayers nand currentAt
+        for (LuckPermsPlayerEntity l : luckpermsPlayers) {
+            boolean existsInLuckPerms = false;
+            for(AdminTeamEntity at : currentAt) {
+                if (l.getUsername().equals(at.getUsername())){
+                    existsInLuckPerms = true;
+                    break;
                 }
             }
+            if(!existsInLuckPerms) {
+                AdminTeamEntity newAtMember = new AdminTeamEntity();
+                newAtMember.setUsername(l.getUsername());
+                newAtMember.setPrimary_group(l.getPrimary_group());
+                newAtMember.setUuid(getUuid(l.getUsername()));
+                newAt.add(newAtMember);
+            }
         }
-        adminTeamRepository.saveAll(iterable);
+
+        adminTeamRepository.saveAll(newAt);
+
+
+        for (AdminTeamEntity l : currentAt) {
+            boolean existsInLuckPerms = false;
+            for(LuckPermsPlayerEntity at : luckpermsPlayers) {
+                if (l.getUsername().equals(at.getUsername())){
+                    existsInLuckPerms = true;
+                    break;
+                }
+            }
+            if(!existsInLuckPerms) {
+                adminTeamRepository.delete(l);
+            }
+        }
+
+
+        // zmenit rank pokud byl rank zmenen
+        for (AdminTeamEntity l : currentAt) {
+            boolean existsInLuckPerms = false;
+            for(LuckPermsPlayerEntity at : luckpermsPlayers) {
+                if (l.getUsername().equals(at.getUsername()) && l.getPrimary_group().equals(at.getPrimary_group())){
+//                    if (l) {
+//
+//                    }
+                    existsInLuckPerms = true;
+                    break;
+                }
+            }
+            if(!existsInLuckPerms) {
+                adminTeamRepository.delete(l);
+            }
+        }
+
+
+
+        //adminTeamRepository.saveAll(iterable);
     }
 
     public String getUuid(String name) {

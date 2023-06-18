@@ -24,67 +24,67 @@ public class LuckPermsPlayerRootResolver implements GraphQLQueryResolver {
     }
 
     public List<LuckPermsPlayerEntity> getOwners() {
-        return luckPermsPlayerService.getOwners();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getTraineeBuilders() {
-        return luckPermsPlayerService.getTraineeBuilders();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getHelpers() {
-        return luckPermsPlayerService.getHelpers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getBuilders() {
-        return luckPermsPlayerService.getBuilders();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getCoOwners() {
-        return luckPermsPlayerService.getCoOwners();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getEventers() {
-        return luckPermsPlayerService.getEventers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getMainHelpers() {
-        return luckPermsPlayerService.getMainHelpers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getTraineeHelpers() {
-        return luckPermsPlayerService.getTraineeHelpers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getAdmins() {
-        return luckPermsPlayerService.getAdmins();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getDevelopers() {
-        return luckPermsPlayerService.getDevelopers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getMainBuilders() {
-        return luckPermsPlayerService.getMainBuilders();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getMainDevelopers() {
-        return luckPermsPlayerService.getMainDevelopers();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getMainTechnics() {
-        return luckPermsPlayerService.getMainTechnics();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getTechnics() {
-        return luckPermsPlayerService.getTechnics();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getTesters() {
-        return luckPermsPlayerService.getTesters();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getManagement() {
-        return luckPermsPlayerService.getManagement();
+        return null;
     }
 
     public List<LuckPermsPlayerEntity> getAdminTeam() {
