@@ -42,11 +42,9 @@ public class AdminTeamMutation implements GraphQLMutationResolver{
         List<LuckPermsPlayerEntity> luckpermsPlayers = luckPermsPlayerRepository.findAllAT();
         List<AdminTeamEntity> currentAt = adminTeamRepository.findAll();
 
-        // co potrebujeme ?
-
         List<AdminTeamEntity> newAt = new ArrayList<>();
 
-        // vzit nove lidi a nahrat je do databaze + uuid    luckpermsPlayers nand currentAt
+        // New people to AT
         for (LuckPermsPlayerEntity l : luckpermsPlayers) {
             boolean existsInLuckPerms = false;
             for(AdminTeamEntity at : currentAt) {
@@ -66,7 +64,7 @@ public class AdminTeamMutation implements GraphQLMutationResolver{
 
         adminTeamRepository.saveAll(newAt);
 
-
+        // Remove players after derank
         for (AdminTeamEntity l : currentAt) {
             boolean existsInLuckPerms = false;
             for(LuckPermsPlayerEntity at : luckpermsPlayers) {
@@ -81,26 +79,23 @@ public class AdminTeamMutation implements GraphQLMutationResolver{
         }
 
 
-        // zmenit rank pokud byl rank zmenen
+        // When change rank
         for (AdminTeamEntity l : currentAt) {
             boolean existsInLuckPerms = false;
             for(LuckPermsPlayerEntity at : luckpermsPlayers) {
-                if (l.getUsername().equals(at.getUsername()) && l.getPrimary_group().equals(at.getPrimary_group())){
-//                    if (l) {
-//
-//                    }
+                if (l.getUsername().equals(at.getUsername()) && !l.getPrimary_group().equals(at.getPrimary_group())){
+                        AdminTeamEntity entity = adminTeamRepository.findByUsername(l.getUsername());
+                        entity.setPrimary_group(at.getPrimary_group());
+                        adminTeamRepository.save(entity);
                     existsInLuckPerms = true;
                     break;
                 }
+
+
             }
-            if(!existsInLuckPerms) {
-                adminTeamRepository.delete(l);
-            }
+
         }
 
-
-
-        //adminTeamRepository.saveAll(iterable);
     }
 
     public String getUuid(String name) {
